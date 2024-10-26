@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import axiosServer from "@/utils/axios.server";
 
 

@@ -12,19 +12,15 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
     const path = usePathname()
 
     return (
-        <div>
-            {
-                (!path.includes('/dashboard') && !path.includes('auth'))
-                    ? <Navbar />
-                    : null
-            }
-            <Provider store={store}>
-                <NextUIProvider>
-                    <UserProvider>
-                        {children}
-                    </UserProvider>
-                </NextUIProvider>
-            </Provider>
-        </div>
-    )
+        <Provider store={store}>
+            <NextUIProvider>
+                <UserProvider>
+                    {
+                        (!path.includes('/dashboard') && !path.includes('auth')) && <Navbar />
+                    }
+                    {children}
+                </UserProvider>
+            </NextUIProvider>
+        </Provider>
+    );
 }

@@ -18,6 +18,9 @@ type UserContextType = {
     setIsLoading: (isLoading: boolean) => void;
     isDataLoading: boolean;
     setIsDataLoading: (isDataLoading: boolean) => void
+    isOpen: boolean;
+    openSidebar: () => void;
+    closeSidebar: () => void;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -32,7 +35,10 @@ const UserContext = createContext<UserContextType>({
     isLoading: false,
     setIsLoading: () => {},
     isDataLoading: false,
-    setIsDataLoading: () => {}
+    setIsDataLoading: () => {},
+    isOpen: false,   
+    openSidebar: () => {}, 
+    closeSidebar: () => {}
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
@@ -45,6 +51,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const [ isDataLoading, setIsDataLoading ] = useState(false);
     const [ numberApoinment, setNumberAppointmnent ] = useState<number | null>(null);
     const [ modalKey, setModalKey ] = useState<ModalTypes | null>(null)
+    const [ isOpen, setIsOpen ] = useState(false)
+
+    const openSidebar = () => { 
+        setIsOpen(true) 
+        console.log('abierto')
+    }
+    const closeSidebar = () => { setIsOpen(false) }
 
     useEffect(() => {
 
@@ -85,7 +98,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             isLoading,
             setIsLoading,
             isDataLoading, 
-            setIsDataLoading
+            setIsDataLoading,
+            isOpen,
+            openSidebar,
+            closeSidebar
         }}>
             {children}
         </UserContext.Provider>

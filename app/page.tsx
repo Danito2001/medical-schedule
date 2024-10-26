@@ -17,10 +17,10 @@ export default function Home() {
 	const router = useRouter()
 
 	return (
-		<div className="flex flex-col items-center justify-center space-y-20">
-			<div className="flex flex-col lg:flex-row justify-center space-x-40 pt-20">
+		<div className="flex flex-col items-center justify-center space-y-20 p-4">
+			<div className="flex flex-col items-center gap-20 lg:flex-row pt-20">
 				<div className="flex flex-col items-center">
-					<h1 className="text-3xl font-bold">Citas médicas convenientes y personalizadas</h1>
+					<h1 className="text-3xl font-bold text-center">Citas médicas convenientes y personalizadas</h1>
 					<span className="pb-8 opacity-85">Reserve citas con los médicos mejor calificados en su área. <br />Obtenga la atención que necesita, según su horario.</span>
 					<Button
 						onClick={() => router.push('/medical_consultation/patient_information')} 
@@ -45,7 +45,7 @@ export default function Home() {
 				<div className="flex flex-col items-center">
 					<span className="opacity-85">¿Eres un médico profesional? Inicia sesión aquí</span>
 					<h2 className="font-bold text-3xl">Conéctate con tu equipo médico</h2>
-					<span>Inicia sesión para acceder a tu perfil, gestionar citas y ofrecer la mejor atención a tus pacientes. ¡Estamos aquí para apoyarte!</span>
+					<span className="text-center">Inicia sesión para acceder a tu perfil, gestionar citas y ofrecer la mejor atención a tus pacientes. ¡Estamos aquí para apoyarte!</span>
 				</div>
 				<Button 
 				onClick={() => router.push('/auth/login')}

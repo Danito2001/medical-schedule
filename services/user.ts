@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 import { userContext } from "@/context/user.context";
 import axiosClient from "@/utils/axios.client"
-import { useAvailability } from "@/hooks/useAvailability";
 
 interface CreateProps {
     firstValue: string;
