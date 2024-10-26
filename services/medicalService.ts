@@ -1,17 +1,6 @@
 import { useEffect, useState } from "react"
+import { customSwal } from "@/helpers/custom_swal";
 import axiosClient from "@/utils/axios.client"
-
-interface Specialty {
-    id: number;
-    name: string;
-}
-
-interface Professional {
-    id: number;
-    name: string;
-    lastName: string;
-    specialty: Specialty; 
-}
 
 
 const cache: { [key:string]: any } = {}
@@ -30,7 +19,6 @@ export const useMedicalData = () => {
     const [ specialty, setSpecialty ] = useState([])
     const [ center, setCenter ] = useState([])
     const [ prevision, setPrevision ] = useState([])
-    // const [ profesionals, setProfesionals ] = useState<Professional[]>([])
     const [ isLoading, setIsLoading ] = useState(false)
 
     useEffect(() => {
@@ -44,17 +32,20 @@ export const useMedicalData = () => {
                     fetchFromCacheOrApi('/specialty'),
                     fetchFromCacheOrApi('/medical-center'),
                     fetchFromCacheOrApi('/previsions'),
-                    // fetchFromCacheOrApi('/doctor')
                 ])
 
                 setSpecialty(specialtiesData)
                 setCenter(centerData)
                 setPrevision(previsionData)
-                // setProfesionals(doctorData)
 
                 setIsLoading(false)
             } catch (error) {
                 console.log({"Error fetching data": error})
+                customSwal({
+                    title: "No fue posible obtener datos del sistema",
+                    text: "Por favor, recargue la pagina",
+                    error: "error"
+                })
             }
         }
 

@@ -6,8 +6,8 @@ import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 export default function Reservation() {
 
     return (
-        <div className="flex flex-col items-center pt-20 space-y-6">
-            <h2 className="text-blue-600 font-bold text-2xl">Si ya tienes una hora agendada</h2>
+        <div className="flex flex-col items-center pt-20 space-y-6 p-4">
+            <h2 className="text-blue-600 font-bold text-2xl text-center">Si ya tienes una hora agendada</h2>
             <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6 pb-10"> 
                 <div className="flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
                     <div className="flex flex-col bg-blue-400 p-4 rounded-lg items-center">

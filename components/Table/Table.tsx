@@ -23,9 +23,12 @@ interface Props {
 
 const App = React.memo(({ patients, isLoading }: { patients?: Props[], isLoading?: boolean }) => {
 
-    if (!Array.isArray(patients)) return null;
+    // Estado y configuración de paginación
+    const [page, setPage] = React.useState(1);
+    const rowsPerPage = 10;
 
-    const newData = patients.map(({ patient, numberAppointment, status, dateAndTime }) => {
+    // Mapeo de los datos solo si 'patients' es un array válido
+    const newData = Array.isArray(patients) ? patients.map(({ patient, numberAppointment, status, dateAndTime }) => {
         const date = new Date(dateAndTime);
         const formattedDate = date.toLocaleDateString('es-ES');
         const time = formattedTime(date);
@@ -43,18 +46,18 @@ const App = React.memo(({ patients, isLoading }: { patients?: Props[], isLoading
             dateAppointment: formattedDate,
             time: time,
         };
-    });
-
-    const [page, setPage] = React.useState(1);
-    const rowsPerPage = 10;
+    }) : [];
 
     const pages = Math.ceil(newData.length / rowsPerPage);
 
+    // Uso de useMemo sin condicionales
     const items = React.useMemo(() => {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
         return newData.slice(start, end);
     }, [page, newData]);
+
+    if (!Array.isArray(patients)) return null;
 
     return (
         <Table
@@ -103,5 +106,8 @@ const App = React.memo(({ patients, isLoading }: { patients?: Props[], isLoading
         </Table>
     );
 });
+
+// Agrega displayName para el componente
+App.displayName = "PatientTable";
 
 export default App;
