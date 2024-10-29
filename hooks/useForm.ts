@@ -122,6 +122,9 @@ export const useForm = ({initialFields, previsionKey}: InitProps) => {
                     }
                 })
                 setErrors(validationErrors)
+            } else if (error.response.data.message) {
+
+                validationErrors['apiError'] = error.response.data.message
             }
             if (previsionId === 0) {
                 setStatusError('Debes seleccionar una prevision')

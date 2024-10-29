@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cookies } from "next/headers";
 
-const baseURL = process.env.NEXT_API_BASE_URL || "https://medical-schedule-backend.onrender.com";
+const baseURL = process.env.NEXT_API_BASE_URL || "https://medical-schedule-backend.onrender.com/api";
 
 const axiosServer = axios.create({
     baseURL

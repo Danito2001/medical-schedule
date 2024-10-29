@@ -37,7 +37,6 @@ export default function Sidebar({currentSection, onPatient, onAvailability}: Pro
                 icon: 'success'
             })
         } catch (error:any) {
-            console.log("Error al cerrar sesión:", error)
             Swal.fire({
                 title: 'Error al cerrar sesión',
                 text:error?.response?.data?.message,

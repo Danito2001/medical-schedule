@@ -8,7 +8,6 @@ import { useMedicalData } from "@/services/medicalService";
 import { validateData } from "@/store/actions/medicalActions";
 
 export default function PatientInformation() {
-    
 
     const { previsionKey, handlePrevision } = useAppointment();
     const { prevision, isLoading:isDataLoading } = useMedicalData();
@@ -66,7 +65,7 @@ export default function PatientInformation() {
                             />
                             { errors && <span className="text-red-500">{errors.email}</span>}
                             <span className="opacity-80">Este correo será utilizado para enviar información de la hora medica.</span>
-                            { errors && <span className="text-red-500">{errors.error}</span>}
+                            { errors && <span className="text-red-500">{errors.apiError}</span>}
                         </div>
                     </div>
                     <div>
