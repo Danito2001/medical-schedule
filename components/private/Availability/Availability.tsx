@@ -29,7 +29,7 @@ export default function Availability() {
         refreshKey,
     } = useAvailability({createAvailability})
 
-    const { user } = userContext()
+    const { user, isLoading } = userContext()
     
     const [ isPatient, setIsPatient ] = useState<any>([])
     const [ filteredPatient, setFilteredPatient ] = useState<any>([])
@@ -73,7 +73,7 @@ export default function Availability() {
     const availability = [user.DoctorAvailability]
     
     return (
-        <div className="relative flex lg:overflow-hidden min-h-screen">
+        <div className="relative flex overflow-x-hidden lg:overflow-hidden min-h-screen">
             <form onSubmit={submitForm} className={classNames(
                 "absolute top-0 left-0 w-full pt-28 transition-all duration-300 ease-in-out",
                 {
@@ -92,7 +92,7 @@ export default function Availability() {
                     <h2 className="text-center text-xl font-semibold text-blue-500 mb-4">Selecciona tu disponibilidad</h2>
 
                     <div className="flex flex-col lg:flex-row justify-center gap-20">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col items-center">
                             <div className="flex flex-col w-full border justify-center border-blue-500 rounded-lg p-6 h-[250px]">
                                 <h3 className="mb-2 font-bold text-lg text-center">Días disponibles</h3>
                                 {
@@ -139,12 +139,14 @@ export default function Availability() {
                 <div>
                     <div className="flex justify-between px-20 pt-2">
                         <Button
+                            disabled={isLoading}
                             onClick={cleanSelected}
                             className="bg-red-500 text-white"
                         >
                             Limpiar
                         </Button>
                         <Button
+                            disabled={isLoading}
                             onClick={() => {
                                 setTimeout(() => {
                                     cleanSelected();

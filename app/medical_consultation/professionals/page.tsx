@@ -96,6 +96,7 @@ export default function Professionals() {
 
             } catch (error: any) {
                 console.log(error?.response?.data?.message)
+                setIsDataLoading(false)
             }
         }
 

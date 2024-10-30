@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { time } from "@/components/common/Select/data";
 import * as Yup from 'yup';
 import { userContext } from "@/context/user.context";
+import { customSwal } from "@/helpers/custom_swal";
 
 interface Time {
     day: string[];
@@ -73,7 +74,14 @@ export const useAvailability = ({createAvailability}: {createAvailability?: any}
 			await validationSchema.validate({ selectedDays, arrayTime }, { abortEarly: false });
 			await createAvailability({selectedDays, firstValue, secondValue, doctorId})
 
+			customSwal({
+				title: "¡Disponibilidad registrada con éxito!",
+				error: 'success'
+			})
+			setIsLoading(false)
+
 		} catch (error) {
+			setIsLoading(false)
 			if (error instanceof Yup.ValidationError) {
 				const newErrors: Record<string, string> = {};
 				error.inner.forEach(err => {

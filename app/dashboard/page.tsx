@@ -35,7 +35,7 @@ export default function Dashboard() {
                 onPatient={handlePatient}
                 onAvailability={handleAvailability}
             />
-            <div className="px-4 'lg:pl-[200px] lg:px-20">
+            <div className="px-4 lg:pl-[200px] lg:px-20">
                 {renderedSections()}    
             </div>
         </>
