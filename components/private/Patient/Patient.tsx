@@ -19,7 +19,7 @@ export default function Patient() {
 
 
     useEffect(() => {
-
+        console.log({fecha_Tabla: user?.appointment.map( a => a.dateAndTime)})
         if (user && user.appointment && Array.isArray(user.appointment)) {
             const dataPatient = user?.appointment.map(({ id, status, patient, numberAppointment, dateAndTime }) => {
                 return { id, status, patient, numberAppointment, dateAndTime }

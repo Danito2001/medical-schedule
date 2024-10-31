@@ -74,7 +74,7 @@ export default function SuccessfulReservation({ params }: { params: { numberAppo
                 const objectDate = new Date(dateAndTime)
                 const time = formattedTime(objectDate)
 
-                await axiosClient.post('http://localhost:3001/api/send-email', {
+                await axiosClient.post('https://medical-schedule-backend.onrender.com/api/send-email', {
                     to: email,
                     subject: 'Cita agendada',
                     text: `Su cita ha sido agendada exitosamente para el día ${stringDate} - ${time} horas.`,

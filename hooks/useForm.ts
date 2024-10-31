@@ -81,6 +81,7 @@ export const useForm = ({initialFields, previsionKey}: InitProps) => {
             setIsLoading(false)
             router.push(`appointment_detail/${numberAppointment}`)
         } catch (validationErrors) {
+            setIsLoading(false)  
             if (validationErrors instanceof Yup.ValidationError) {
                 const newErrors: Record<string, string> = {}
                 validationErrors.inner.forEach( (error) => {

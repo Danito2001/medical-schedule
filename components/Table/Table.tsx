@@ -23,11 +23,9 @@ interface Props {
 
 const App = React.memo(({ patients, isLoading }: { patients?: Props[], isLoading?: boolean }) => {
 
-    // Estado y configuración de paginación
     const [page, setPage] = React.useState(1);
     const rowsPerPage = 10;
 
-    // Mapeo de los datos solo si 'patients' es un array válido
     const newData = Array.isArray(patients) ? patients.map(({ patient, numberAppointment, status, dateAndTime }) => {
         const date = new Date(dateAndTime);
         const formattedDate = date.toLocaleDateString('es-ES');

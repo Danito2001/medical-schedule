@@ -80,7 +80,7 @@ export default function BottomSheet({ isOpen, setIsOpen, isCreateAppointment, se
                         size="lg" 
                         className="bg-pink-500 text-white"
                     >
-                        { (!isCreateAppointment) ? 'Continuar' : 'Cargando...'}
+                        { (!isCreateAppointment) ? 'Agendar' : 'Cargando...'}
                     </Button>
                     <Button 
                         disabled={isCreateAppointment}

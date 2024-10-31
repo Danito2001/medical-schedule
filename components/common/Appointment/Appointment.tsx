@@ -8,6 +8,7 @@ import {
     UserIcon,
     XMarkIcon
 } from "@heroicons/react/24/solid";
+import classNames from "classnames";
 
 interface AppointmentProps {
     numberAppointment: number;
@@ -88,7 +89,11 @@ export default function Appointment({
                         </div>
                     </div>
                     <div>
-                        <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-2 text-white text-center">
+                        <div className={classNames("flex gap-2 text-white text-center",{
+                            "justify-end": (modalKey === "cancelar"),
+                            "flex-col md:flex-row": (modalKey === "confirmar")
+                        })}>
+                            
                             <span className="bg-blue-500 p-1 rounded-lg">{daysUntilAppointment}</span>
                             <span className={`${modalKey === 'confirmar' && 'bg-red-500 p-1 rounded-lg'}`}>
                                 {modalKey === "confirmar" && 'Confirme ahora'}
@@ -111,7 +116,7 @@ export default function Appointment({
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col lg:flex-row lg:space-x-4 items-center bg-gray-300 p-4 rounded-lg">
+                <div className="flex flex-col items-center justify-center bg-gray-300 p-4 rounded-lg">
                     <div className="flex items-center text-red-500">
                         <XMarkIcon width={20} />
                         <span>Cita no confirmada</span>

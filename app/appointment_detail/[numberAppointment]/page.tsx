@@ -10,8 +10,7 @@ import { useCalculateDaysUntilAppointment } from "@/helpers/calculateDays";
 import { useAppointment } from "@/hooks/useAppointment";
 import { updateAppointment } from "@/services/appointment.services";
 import { customSwal } from "@/helpers/custom_swal";
-import { convertTo12HourFormat } from "@/helpers/convert12Hour";
-import { formattedCenter, formattedDate, formattedSpecialty } from "@/helpers/formattedItems";
+import { formattedCenter, formattedDate, formattedSpecialty, formattedTime } from "@/helpers/formattedItems";
 import { SkeletonComponent } from "@/components/common/Skeleton";
 import { AppointmentType } from "@/types/appointment";
 
@@ -131,19 +130,17 @@ export default function Detail({ params }: { params: { numberAppointment: number
     const dateObject = new Date(dateAndTime);
     const date = formattedDate(dateObject)
 
-    const hour = dateAndTime.split('T')[1]
-    const cleanTimeString = hour.split('.')[0]
-    const formattedHour = convertTo12HourFormat(cleanTimeString)
-
     const centerEs = formattedCenter(commune)
     const specialtyEs = formattedSpecialty(specialtyName)
 
+    const newDate = new Date(dateAndTime);
+    const time = formattedTime(newDate);
 
     return (
         <Appointment
             numberAppointment={numberAppointment}
             date={date}
-            time={formattedHour}
+            time={time}
             doctor={doctorName + ' ' + lastName}  
             specialty={specialtyEs!}
             center_of_preference={centerEs!}  
