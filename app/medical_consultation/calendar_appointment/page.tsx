@@ -70,7 +70,7 @@ export default function MedicalCalendar() {
     return (
         <div className="pt-4">
             <div className="flex items-center justify-center bg-blue-500 py-20">
-                <div className="flex flex-col items-center bg-white px-12 py-2 space-y-2 w-[500px]">
+                <div className="flex flex-col items-center bg-white px-12 py-2 space-y-2 w-[500px] animate__animated animate__fadeIn">
                     <div className="text-blue-500">
                         <h2 className="font-semibold text-xl">Seleccione una fecha</h2>
                     </div>

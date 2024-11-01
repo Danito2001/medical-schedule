@@ -26,7 +26,7 @@ export default function PatientInformation() {
             <div className="flex items-center justify-center bg-blue-500 py-20">
                 <form 
                     onSubmit={handleSubmitPatient}
-                    className="bg-white px-20 py-2 space-y-10 rounded-lg"
+                    className="bg-white px-20 py-2 space-y-10 rounded-lg animate__animated animate__fadeIn"
                 >
                     <div className="text-blue-500">
                         <h2 className="font-semibold text-xl">Datos del paciente</h2>

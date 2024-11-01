@@ -1,7 +1,7 @@
 import { Key, useState } from "react"
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setCalendarDay, setDate, setLocationAndSpecialty } from "@/store/slices/appointmentSlice";
+import { setCalendarDay, setDate, setLocationAndSpecialty, setTimeAndProfesional } from "@/store/slices/appointmentSlice";
 import { customSwal } from "@/helpers/custom_swal";
 import { completeCalendarDays } from "@/helpers/completeCalendarDays";
 
@@ -12,6 +12,15 @@ interface Item {
 	name: string;
 	commune: string;
 	value: string;
+}
+
+interface HandleProps {
+    name: string;
+    nameId: number;
+    lastName: string;
+    startTime: string;
+    endTime: string;
+    date: string;
 }
 
 interface AppointmentProps {
@@ -36,6 +45,7 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
     const [ startDate, setStartDate ] = useState<Value>(null) // calendar_appointment
 
     const [ isLoading, setIsLoading ] = useState(false)
+    const [ isOpen, setIsOpen ] = useState(false)
     const [ status, setStatus ] = useState<OptionsUpdate>('pending');
 
     const formattedDate = startDate instanceof Date ? startDate?.toDateString() : ''
@@ -131,6 +141,36 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
             setIsLoading(false);
         }, 1000);
     };
+
+    const handleTimeAppointment = ({ nameId, startTime, name, lastName, date }: HandleProps) => {
+    
+        try {
+            
+            console.log(nameId, name, lastName)
+
+            const fullName = name + ' ' + lastName
+            dispatch(setTimeAndProfesional({ nameId, time: startTime, profesional: fullName }));
+    
+            const [selectionTime, period] = startTime.split(/(am|pm)/);
+    
+            setTimeout(() => {
+                setIsOpen(true);
+            }, 1000);
+    
+            const isoDate = new Date(date!).toISOString();
+            const dateTime = isoDate.split('T')
+    
+            if (!dateTime) {
+                throw new Error('Error obteniendo la fecha actual.');
+            }
+    
+            const addedTimeDate = new Date(`${dateTime[0]} ${selectionTime} ${period.toUpperCase()}`);
+    
+            dispatch(setDate({ date: addedTimeDate.toISOString() }));
+        } catch (error) {
+            console.error('Error al manejar la cita:', error);
+        }
+    };
     
 
     const confirmAppointment = () => {
@@ -159,6 +199,7 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
         handleLocation,
         handleLocationSubmit,
         handleCalendarSubmit,
+        handleTimeAppointment,
         dateArray,
         startDate,
         setStartDate,

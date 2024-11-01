@@ -8,13 +8,12 @@ export const generateTimeSlots = (startTime: string, endTime: string, interval: 
     today.setMinutes(today.getMinutes() + 10)
 
     const time = formattedTime(today)
-    const [ hour ] = time.split(/(am|pm)/i)
 
     // Convierte tiempo en formato hh:mmam/pm a minutos desde medianoche
     const timeToMinutes = (time: string): number => {
 
-        const [timeStr, period] = time.split(/(am|pm)/);
-        const [hoursStr, minutesStr] = timeStr.split(':');
+        const [ timeStr, period ] = time.split(/(am|pm)/);
+        const [ hoursStr, minutesStr ] = timeStr.split(':');
         let hours = parseInt(hoursStr, 10);
         const minutes = parseInt(minutesStr, 10);
 
@@ -53,11 +52,13 @@ export const generateTimeSlots = (startTime: string, endTime: string, interval: 
     const validationTime = () => {
         const futureDate = date.toISOString().split('T')[0];
         const currentDate = today.toISOString().split('T')[0];
-    
+
+        const formattedCurrentTime = timeToMinutes(time);        
+
         if (currentDate < futureDate) {
             return slots;
         } else if (currentDate === futureDate) {
-            return slots.filter((slot) => slot > time);
+            return slots.filter((slot) => timeToMinutes(slot) > formattedCurrentTime);
         } else {
             return [];
         }

@@ -37,7 +37,7 @@ export default function MedicalReserve() {
             <div className="flex items-center justify-center bg-blue-500 py-20">
                 <form
                     onSubmit={handleLocationSubmit}
-                    className="p-8 bg-gray-100 space-y-6 rounded-lg"
+                    className="p-8 bg-gray-100 space-y-6 rounded-lg animate__animated animate__fadeIn"
                 >
                     <div className="text-blue-500">
                         <h2 className="font-semibold">Consulta Médica</h2>
