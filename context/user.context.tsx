@@ -21,6 +21,8 @@ type UserContextType = {
     isOpen: boolean;
     openSidebar: () => void;
     closeSidebar: () => void;
+    isBottomOpen: boolean
+    setIsBottomOpen: (isBottomOpen: boolean) => void;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -38,8 +40,10 @@ const UserContext = createContext<UserContextType>({
     setIsDataLoading: () => {},
     isOpen: false,   
     openSidebar: () => {}, 
-    closeSidebar: () => {}
-});
+    closeSidebar: () => {},
+    isBottomOpen: false,
+    setIsBottomOpen: () => {}
+}); 
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
 
@@ -52,10 +56,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const [ numberApoinment, setNumberAppointmnent ] = useState<number | null>(null);
     const [ modalKey, setModalKey ] = useState<ModalTypes | null>(null)
     const [ isOpen, setIsOpen ] = useState(false)
+    const [ isBottomOpen, setIsBottomOpen ] = useState(false) 
 
     const openSidebar = () => { 
         setIsOpen(true) 
-        console.log('abierto')
     }
     const closeSidebar = () => { setIsOpen(false) }
 
@@ -101,7 +105,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             setIsDataLoading,
             isOpen,
             openSidebar,
-            closeSidebar
+            closeSidebar,
+            isBottomOpen, 
+            setIsBottomOpen
         }}>
             {children}
         </UserContext.Provider>

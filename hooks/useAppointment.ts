@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setCalendarDay, setDate, setLocationAndSpecialty, setTimeAndProfesional } from "@/store/slices/appointmentSlice";
 import { customSwal } from "@/helpers/custom_swal";
 import { completeCalendarDays } from "@/helpers/completeCalendarDays";
+import { userContext } from "@/context/user.context";
 
 type OptionsUpdate = "pending" | "active" | "disabled"
 
@@ -34,6 +35,8 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const useAppointment = ({specialtyItems = [], centerItems = []}: AppointmentProps = {} ) => {
 
+    const { isBottomOpen, setIsBottomOpen } = userContext();
+
     const [ previsionKey, setPrevisionKey ] = useState<Key | null>(null) // patient_information
 
     const [ specialtySelected, setSpecialtySelected ] = useState<Key>('') // medical_reserve
@@ -45,19 +48,20 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
     const [ startDate, setStartDate ] = useState<Value>(null) // calendar_appointment
 
     const [ isLoading, setIsLoading ] = useState(false)
-    const [ isOpen, setIsOpen ] = useState(false)
+
     const [ status, setStatus ] = useState<OptionsUpdate>('pending');
 
     const formattedDate = startDate instanceof Date ? startDate?.toDateString() : ''
     const dateArray = formattedDate ? formattedDate.split(' ') : [];
     const calendarDay = completeCalendarDays(dateArray[0])
 
+    const router = useRouter()
+    const dispatch = useDispatch()
+
     const normalizedItems = (items: Item[], key:Key | null):Item | undefined => {
         return items.find( (item) => (item.id === Number(key) ))
     }
 
-    const router = useRouter()
-    const dispatch = useDispatch()
 
     const handleSpecialty = (key: Key | null) => {
         setIsLoading(true);
@@ -143,32 +147,27 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
     };
 
     const handleTimeAppointment = ({ nameId, startTime, name, lastName, date }: HandleProps) => {
-    
         try {
             
-            console.log(nameId, name, lastName)
-
             const fullName = name + ' ' + lastName
             dispatch(setTimeAndProfesional({ nameId, time: startTime, profesional: fullName }));
-    
+
             const [selectionTime, period] = startTime.split(/(am|pm)/);
-    
-            setTimeout(() => {
-                setIsOpen(true);
-            }, 1000);
-    
+                            
             const isoDate = new Date(date!).toISOString();
             const dateTime = isoDate.split('T')
-    
+            
             if (!dateTime) {
                 throw new Error('Error obteniendo la fecha actual.');
             }
-    
+            
             const addedTimeDate = new Date(`${dateTime[0]} ${selectionTime} ${period.toUpperCase()}`);
-    
             dispatch(setDate({ date: addedTimeDate.toISOString() }));
+            
+            setIsBottomOpen(true);
+
         } catch (error) {
-            console.error('Error al manejar la cita:', error);
+            console.log('Error al manejar la cita:', error);
         }
     };
     
@@ -189,6 +188,7 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
         })
     }
 
+
     return {
         previsionKey,
         setPrevisionKey,
@@ -204,6 +204,8 @@ export const useAppointment = ({specialtyItems = [], centerItems = []}: Appointm
         startDate,
         setStartDate,
         isLoading,
+        setIsBottomOpen,
+        isBottomOpen,
         status,
         confirmAppointment,
         cancelAppointment

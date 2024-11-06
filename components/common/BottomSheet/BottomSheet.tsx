@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
@@ -8,29 +7,33 @@ import { userContext } from "@/context/user.context";
 import { RootState } from "@/store/store";
 import { formattedCenter, formattedDate, formattedSpecialty } from "@/helpers/formattedItems";
 import { handleCreateAppointment } from "@/services/appointment.services";
+import { useAppointment } from "@/hooks/useAppointment";
+import { useEffect, useState } from "react";
 
 interface Props {
-    isOpen: boolean;
-    setIsOpen: Dispatch<SetStateAction<boolean>>;
     isCreateAppointment: boolean;
     setIsCreateAppointment: (isCreateAppointment: boolean) => void;
 }
 
-export default function BottomSheet({ isOpen, setIsOpen, isCreateAppointment, setIsCreateAppointment }: Props) {
+export default function BottomSheet({ isCreateAppointment, setIsCreateAppointment }: Props) {
+
+    const { isBottomOpen, setIsBottomOpen } = useAppointment();
 
     const dispatch = useDispatch()
     const router = useRouter()
 
     const { rut, setNumberAppointmnent } = userContext()
+    
     const { date, time, center, specialty, email, profesional } = useSelector( (state:RootState) => state.appointment)
 
     const newDate = formattedDate(date)
+
     const centerEs = formattedCenter(center)
     const specialtyEs = formattedSpecialty(specialty)
 
     return (
         <nav 
-            className={`${isOpen ? 'translate-y-0' : 'translate-y-full'} shadow-xl fixed inset-0 flex items-end justify-center  bg-opacity-50 z-10 h-screen transition-transform duration-300`}
+            className={`${isBottomOpen ? 'translate-y-0' : 'translate-y-full'} shadow-xl fixed inset-0 flex items-end justify-center  bg-opacity-50 z-10 h-screen transition-transform duration-300`}
         >
             <div className="bg-blue-500 rounded-t-lg w-full sm:w-1/2 p-4">
 
@@ -84,7 +87,7 @@ export default function BottomSheet({ isOpen, setIsOpen, isCreateAppointment, se
                     </Button>
                     <Button 
                         disabled={isCreateAppointment}
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => setIsBottomOpen(false)}
                         size="lg" 
                         className="bg-gray-300 text-black"
                     >

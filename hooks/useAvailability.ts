@@ -87,7 +87,6 @@ export const useAvailability = ({createAvailability}: {createAvailability?: any}
 				error.inner.forEach(err => {
 					if (err.path) {
 						newErrors[err.path] = err.message;
-						console.log(err.path)
 					}
 				});
 				setError(newErrors);
