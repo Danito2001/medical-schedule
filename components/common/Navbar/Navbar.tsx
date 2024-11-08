@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BuildingOffice2Icon, CalendarIcon, ClockIcon, HomeIcon } from '@heroicons/react/24/solid'
+import { BuildingOffice2Icon, CalendarIcon, ClockIcon, HomeIcon, UserIcon} from '@heroicons/react/24/solid'
 import { userContext } from '@/context/user.context'
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import Sidebar from '../Sidebar/Sidebar';
@@ -17,7 +17,7 @@ export default function Navbar() {
                 className={`${isOpen ? 'fixed inset-0 z-10' : ''}`}>
             </div>
             <div>
-                <nav className='flex justify-between bg-blue-500 p-4 text-white'>
+                <nav className='flex justify-between bg-blue-500/80 p-4 text-white'>
                     
                     <div className='flex space-x-2 text-white font-semibold text-xl rounded-lg p-2'>
                         <BuildingOffice2Icon onClick={closeSidebar} width={24} />
@@ -29,9 +29,9 @@ export default function Navbar() {
                         <Bars3Icon 
                             onClick={ openSidebar }
                             width={30} 
-                            className="block sm:hidden cursor-pointer"
+                            className="block min-[790px]:hidden cursor-pointer"
                         />
-                        <div className='space-x-2 hidden sm:flex'>
+                        <div className='space-x-2 hidden min-[790px]:flex'>
                             <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
                                 <HomeIcon width={24}/>
                                 <Link 
@@ -53,6 +53,17 @@ export default function Navbar() {
                                     href="/medical_consultation/patient_information">Reserva de hora
                                 </Link>
                             </div>
+                            <div className='flex space-x-2 bg-blue-700 text-white rounded-lg p-2'>
+                                <UserIcon width={24} />
+                                <Link
+                                    onClick={closeSidebar}
+                                    className={`hover:underline ${currentPath === '/medical_appointment' ? 'underline' : ''}`}
+                                    href="/auth/login"
+                                >
+                                    Iniciar sesión
+                                </Link>
+                            </div>
+                            
                         </div>
                     </div>
                 </nav>

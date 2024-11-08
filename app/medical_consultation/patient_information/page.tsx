@@ -10,9 +10,9 @@ import { validateData } from "@/store/actions/medicalActions";
 export default function PatientInformation() {
 
     const { previsionKey, handlePrevision } = useAppointment();
-    const { prevision, isLoading:isDataLoading } = useMedicalData();
-    
-    
+    const { prevision, isLoading: isDataLoading } = useMedicalData();
+
+
     const { errors, formData, onChangeInput, handleSubmitPatient, statusError, isLoading } = useForm({
         initialFields: { rut: '', email: '' },
         previsionKey
@@ -22,9 +22,9 @@ export default function PatientInformation() {
     validateRutAndPrevision()
 
     return (
-        <div className="pt-4">
-            <div className="flex items-center justify-center bg-blue-500 py-20">
-                <form 
+        <div className="bg-blue-500">
+            <div className="flex items-center justify-center py-20">
+                <form
                     onSubmit={handleSubmitPatient}
                     className="bg-white px-20 py-2 space-y-10 rounded-lg animate__animated animate__fadeIn"
                 >
@@ -42,11 +42,13 @@ export default function PatientInformation() {
                                 value={formData.rut}
                                 onChange={onChangeInput}
                             />
-                            <span className="opacity-70">*Ej: 12.345.678-5</span>
-                            { errors && <span className="text-red-500">{errors.rut}</span>}
+                            <p className="opacity-70">
+                                *Utilice un RUT donde XX.XXX.XXX-X tenga todos los dígitos iguales (por ejemplo, 11.111.111-1)
+                            </p>
+                            {errors && <span className="text-red-500">{errors.rut}</span>}
                         </div>
                         <div>
-                            <AutocompleteSpecialty 
+                            <AutocompleteSpecialty
                                 isLoading={isDataLoading}
                                 label="Previsión"
                                 items={prevision}
@@ -63,9 +65,9 @@ export default function PatientInformation() {
                                 value={formData.email}
                                 onChange={onChangeInput}
                             />
-                            { errors && <span className="text-red-500">{errors.email}</span>}
+                            {errors && <span className="text-red-500">{errors.email}</span>}
                             <span className="opacity-80">Este correo será utilizado para enviar información de la hora medica.</span>
-                            { errors && <span className="text-red-500">{errors.apiError}</span>}
+                            {errors && <span className="text-red-500">{errors.apiError}</span>}
                         </div>
                     </div>
                     <div>
@@ -78,7 +80,7 @@ export default function PatientInformation() {
                                 type="submit"
                                 className="bg-pink-600 text-white"
                             >
-                                { !isLoading ? 'Aceptar' : 'Cargando...'}
+                                {!isLoading ? 'Aceptar' : 'Cargando...'}
                             </Button>
                         </div>
                     </div>

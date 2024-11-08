@@ -17,8 +17,14 @@ interface CreateAppointmentProps {
 export const startValidateRutPrevisionEmail = ({ rut, previsionId, email, setRut }: ValidationFields) => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(setPrevisionAndEmail({previsionId: previsionId, email}));
-            setRut(rut)
+            const response = await axiosClient.post('/validateRut', {
+                rut,
+                previsionId
+            });
+            
+            const { rut: rutFromBackend, previsionId: previsionFromBackend } = response.data;
+            dispatch(setPrevisionAndEmail({previsionId: previsionFromBackend, email}));
+            setRut(rutFromBackend)
         } catch (error: any) {
             console.log(error?.response?.data?.message || error.message)
             throw error;

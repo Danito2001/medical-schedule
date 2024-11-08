@@ -11,7 +11,7 @@ export default function Sidebar() {
 
     return (
         <nav className={
-            `sm:hidden fixed z-50 top-0 right-0 h-[50%] w-64 bg-blue-600 transform transition-transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`
+            `min-[790px]:hidden fixed z-50 top-0 right-0 h-[50%] w-64 bg-blue-600 transform transition-transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`
         }>
 
             <div className="flex flex-col justify-center text-center text-[#f5e8c7] space-y-6 py-4 rounded-xl">
