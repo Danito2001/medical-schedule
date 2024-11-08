@@ -18,9 +18,12 @@ export default function Navbar() {
             </div>
             <div>
                 <nav className='flex justify-between bg-blue-500 p-4 text-white'>
-                    <div className='flex space-x-2 items-center'>
-                        <BuildingOffice2Icon width={24}/>
-                        <h1 className='font-semibold text-xl'>MedAgenda</h1>
+                    
+                    <div className='flex space-x-2 text-white font-semibold text-xl rounded-lg p-2'>
+                        <BuildingOffice2Icon onClick={closeSidebar} width={24} />
+                        <Link href="/">
+                            MedAgenda
+                        </Link>
                     </div>
                     <div className='flex'>
                         <Bars3Icon 
@@ -47,7 +50,7 @@ export default function Navbar() {
                                 <CalendarIcon width={24}/>
                                 <Link 
                                     className={`hover:underline ${currentPath === '/medical_appointment' ? 'underline' : ''}`} 
-                                    href="/medical_appointment">Reserva de hora
+                                    href="/medical_consultation/patient_information">Reserva de hora
                                 </Link>
                             </div>
                         </div>

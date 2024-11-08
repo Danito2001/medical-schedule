@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { userContext } from "@/context/user.context";
-import { BuildingOffice2Icon, CalendarIcon, ClockIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { BuildingOffice2Icon, CalendarIcon, ClockIcon, HomeIcon, XMarkIcon, UserIcon } from "@heroicons/react/24/solid";
 
 
 export default function Sidebar() {
@@ -15,7 +15,7 @@ export default function Sidebar() {
         }>
 
             <div className="flex flex-col justify-center text-center text-[#f5e8c7] space-y-6 py-4 rounded-xl">
-                <div className='flex flex-col space-y-6 font-semibold p-4'>
+                <div className='flex flex-col space-y-6 font-semibold p-2'>
                     <div className='flex '>
                         <XMarkIcon
                             onClick={closeSidebar}
@@ -29,10 +29,12 @@ export default function Sidebar() {
                     </div>
                     <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
                         <HomeIcon onClick={closeSidebar} width={24} />
-                        
                         <Link
+                            onClick={closeSidebar}
                             className={`hover:underline ${currentPath === '/' ? 'underline' : ''}`}
-                            href="/">Inicio
+                            href="/"
+                        >
+                            Inicio
                         </Link>
                     </div>
                     <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
@@ -40,7 +42,9 @@ export default function Sidebar() {
                         <Link
                             onClick={closeSidebar}
                             className={`hover:underline ${currentPath === '/reservation' ? 'underline' : ''}`}
-                            href="/reservation">Mis reservas
+                            href="/reservation"
+                        >
+                            Mis reservas
                         </Link>
                     </div>
                     <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
@@ -48,7 +52,19 @@ export default function Sidebar() {
                         <Link
                             onClick={closeSidebar}
                             className={`hover:underline ${currentPath === '/medical_appointment' ? 'underline' : ''}`}
-                            href="/medical_appointment">Reserva de hora
+                            href="/medical_consultation/patient_information"
+                        >
+                            Reserva de hora
+                        </Link>
+                    </div>
+                    <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
+                        <UserIcon width={24} />
+                        <Link
+                            onClick={closeSidebar}
+                            className={`hover:underline ${currentPath === '/medical_appointment' ? 'underline' : ''}`}
+                            href="/auth/login"
+                        >
+                            Iniciar sesión
                         </Link>
                     </div>
                 </div>

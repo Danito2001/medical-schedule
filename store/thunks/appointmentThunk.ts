@@ -1,12 +1,11 @@
 import axiosClient from "@/utils/axios.client";
 import { AppDispatch, RootState } from "../store"
 import { setPrevisionAndEmail } from "../slices/appointmentSlice";
-import { Key } from "react";
 
 interface ValidationFields {
     rut: string;
     email: string;
-    previsionId: Key;
+    previsionId: number;
     setRut: (rut: string | null) => void;
 }
 
@@ -18,15 +17,8 @@ interface CreateAppointmentProps {
 export const startValidateRutPrevisionEmail = ({ rut, previsionId, email, setRut }: ValidationFields) => {
     return async (dispatch: AppDispatch) => {
         try {
-            const response = await axiosClient.post('/validateRut', {
-                rut,
-                previsionId
-            });
-            
-            const { rut: rutFromBackend, previsionId: previsionFromBackend } = response.data;
-
-            dispatch(setPrevisionAndEmail({previsionId: previsionFromBackend, email}));
-            setRut(rutFromBackend)
+            dispatch(setPrevisionAndEmail({previsionId: previsionId, email}));
+            setRut(rut)
         } catch (error: any) {
             console.log(error?.response?.data?.message || error.message)
             throw error;

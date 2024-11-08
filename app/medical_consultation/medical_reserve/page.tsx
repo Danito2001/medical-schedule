@@ -1,13 +1,12 @@
 'use client'
 
-import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import { AutocompleteSpecialty } from "@/components/common/Autocomplete";
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { useAppointment } from "@/hooks/useAppointment";
 import { useMedicalData } from "@/services/medicalService";
 import { validateData } from "@/store/actions/medicalActions";
 import { formattedArrayCenter, formattedArraySpecialty } from "@/helpers/formattedItems";
+import { useRouter } from "next/navigation";
 
 export default function MedicalReserve() {
 
@@ -25,8 +24,10 @@ export default function MedicalReserve() {
         centerItems: center
     })
 
+    const router = useRouter()
     const { validateUserData } = validateData()
     validateUserData()
+    
     
 
     const specialtysEs = formattedArraySpecialty(specialty)
@@ -67,10 +68,6 @@ export default function MedicalReserve() {
                                 >
                                 {!isLoading ? 'Buscar fecha en el calendario' : 'Cargando...'}
                             </Button>                       
-                    </div>
-                    <div className="flex text-blue-500 space-x-2">
-                        <ArrowLeftIcon width={20} />
-                        <Link className="underline" href={'/medical_appointment'}>Selecciona otro tipo de atención</Link>
                     </div>
                 </form>
             </div>

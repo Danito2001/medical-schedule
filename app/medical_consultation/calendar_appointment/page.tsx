@@ -76,20 +76,20 @@ export default function MedicalCalendar() {
                         startDate={startDate instanceof Date ? startDate : null}
                         setStartDate={setStartDate}
                     />
-                    <div className="flex flex-col justify-center space-y-2">
+                    <div className="flex flex-col space-y-2">
                         <span>{selectedDay}</span>
                         <Button
                             disabled={!startDate || isLoading}
                             onClick={handleCalendarSubmit}
                             type="submit"
                             className="bg-pink-600 text-white"
-                        >
+                        > 
                             {
                                 !isLoading ? 'Buscar hora' : 'Cargando...'
                             }
                         </Button>
                     </div>
-                    <div className="flex text-blue-500 space-x-2">
+                    <div className="flex mr-auto text-blue-500 space-x-2">
                         <ArrowLeftIcon width={20} />
                         <button className="underline" onClick={() => router.back()}>Cerrar calendario</button>
                     </div>

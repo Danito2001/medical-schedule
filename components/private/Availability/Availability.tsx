@@ -84,7 +84,7 @@ export default function Availability() {
                 <div className="flex flex-col border border-gray-400 rounded-lg p-4">
                     <div
                         onClick={() => setDisplayAvailability(true)}
-                        className="flex text-blue-500 justify-end cursor-pointer"
+                        className="flex text-blue-500 justify-end cursor-pointer pb-4"
                     >
                         <h3 className="font-semibold underline pr-2">Mi disponibilidad y citas</h3>
                         <ChevronRightIcon width={20} />

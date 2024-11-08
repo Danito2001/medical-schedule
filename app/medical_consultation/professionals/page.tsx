@@ -12,6 +12,7 @@ import { RootState } from "@/store/store";
 import { Doctor } from "@/types/profesional";
 import { formattedDate } from "@/helpers/formattedItems";
 import DoctorCard from "@/components/common/DoctorCard/DoctorCard";
+import { usePathname } from "next/navigation";
 
 interface TimeLengthData {
     length: number;
@@ -20,18 +21,27 @@ interface TimeLengthData {
 
 export default function Professionals() {
 
-    const [professionals, setProfessionals] = useState<Doctor[]>([])
-    const [isDataLoading, setIsDataLoading] = useState(false)
-    const [isCreateAppointment, setIsCreateAppointment] = useState(false)
+    const [ professionals, setProfessionals ] = useState<Doctor[]>([])
+    const [ isDataLoading, setIsDataLoading ] = useState(false)
+    const [ isCreateAppointment, setIsCreateAppointment ] = useState(false)
 
-    const [timeLength, setTimeLength] = useState<TimeLengthData[]>([]);
-    const [timeLoading, setTimeLoading] = useState(true)
+    const [ timeLength, setTimeLength ] = useState<TimeLengthData[]>([]);
+    const [ timeLoading, setTimeLoading ] = useState(true)
 
     const { centerId, specialtyId, date, day } = useSelector((state: RootState) => state.appointment);
     const { validateUserData, previsionId, rut } = validateData()
 
     const dateObject = new Date(date!);
     validateUserData()
+
+    const pathname = usePathname()
+
+    
+    useEffect(() => {
+        if (pathname !== '/medical_consultation/professionals') {
+            console.log('cerrado')
+        }
+    }, [])
 
     useEffect(() => {
         const fetch = async () => {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
 import { BeakerIcon, BuildingOfficeIcon, CalendarIcon, UserIcon } from "@heroicons/react/24/solid";
 
@@ -8,7 +8,7 @@ import { RootState } from "@/store/store";
 import { formattedCenter, formattedDate, formattedSpecialty } from "@/helpers/formattedItems";
 import { handleCreateAppointment } from "@/services/appointment.services";
 import { useAppointment } from "@/hooks/useAppointment";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface Props {
     isCreateAppointment: boolean;
@@ -20,6 +20,7 @@ export default function BottomSheet({ isCreateAppointment, setIsCreateAppointmen
     const { isBottomOpen, setIsBottomOpen } = useAppointment();
 
     const dispatch = useDispatch()
+    const pathname = usePathname()
     const router = useRouter()
 
     const { rut, setNumberAppointmnent } = userContext()
@@ -31,11 +32,15 @@ export default function BottomSheet({ isCreateAppointment, setIsCreateAppointmen
     const centerEs = formattedCenter(center)
     const specialtyEs = formattedSpecialty(specialty)
 
+    useEffect(() => {
+        setIsBottomOpen(false)
+    }, [])
+
     return (
         <nav 
             className={`${isBottomOpen ? 'translate-y-0' : 'translate-y-full'} shadow-xl fixed inset-0 flex items-end justify-center  bg-opacity-50 z-10 h-screen transition-transform duration-300`}
         >
-            <div className="bg-blue-500 rounded-t-lg w-full sm:w-1/2 p-4">
+            <div className="bg-blue-500 rounded-t-lg w-full sm:w-1/2 p-4 pb-6">
 
                 {/* Content */}
                 <div className="space-y-4">

@@ -108,7 +108,7 @@ export default function Sidebar({currentSection, onPatient, onAvailability}: Pro
                         </div>
                     </div>
                     {/* End items */}
-                    <div className="pb-10">
+                    <div className="pb-16 md:pb-10">
                         <Button
                             disabled={isLoading}
                             className="bg-pink-600 text-white"
