@@ -4,16 +4,35 @@ import Link from "next/link"
 import { Button, Input } from "@nextui-org/react"
 import { useForm } from "@/hooks/useForm"
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline"
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { customSwal } from "@/helpers/custom_swal";
+import ReactDOMServer from "react-dom/server";
 
 
-export default function LoginForm() {
+export default function LoginForm({Info}: {Info:JSX.Element}) {
+
+    const pathname = usePathname();
 
     const { onChangeInput, formData, handleLoginForm, errors, statusError, isLoading } = useForm({
         initialFields: {
             email: '',
             password: ''
         }
-    })
+    });
+
+    useEffect(() => {
+        
+        if (pathname === '/auth/login') {
+            customSwal({
+                title: 'Información',
+                html: ReactDOMServer.renderToString(Info),
+                error: "info"
+            })
+        }
+        
+    }, [Info, pathname])
+    
 
     return (
         <form
