@@ -65,8 +65,11 @@ export default function Availability() {
     
     return (
         <div className="relative flex overflow-x-hidden lg:overflow-hidden min-h-screen">
+
+            {/* Set Availability */}
+
             <form onSubmit={submitForm} className={classNames(
-                "absolute top-0 left-0 w-full pt-28 transition-all duration-300 ease-in-out",
+                "absolute w-full pt-28 transition-all duration-300 ease-in-out",
                 {
                     "-translate-x-full opacity-0 pointer-events-none": displayAvailability,
                     "translate-x-0 opacity-100 pointer-events-auto": !displayAvailability
@@ -75,9 +78,9 @@ export default function Availability() {
                 <div className="flex flex-col border border-gray-400 rounded-lg p-4">
                     <div
                         onClick={() => setDisplayAvailability(true)}
-                        className="flex text-blue-500 justify-end cursor-pointer pb-4"
+                        className="flex w-fit text-blue-500 cursor-pointer pb-4"
                     >
-                        <h3 className="font-semibold underline pr-2">Mi disponibilidad y citas</h3>
+                        <h3 className="font-semibold underline pr-2">Mi disponibilidad e historial</h3>
                         <ChevronRightIcon width={20} />
                     </div>
                     <h2 className="text-center text-xl font-semibold text-blue-500 mb-4">Selecciona tu disponibilidad</h2>
@@ -151,6 +154,8 @@ export default function Availability() {
                     </div>
                 </div>
             </form>
+
+            {/* Availability and Patient */}
 
             <div className={classNames(
                 "relative pt-10 space-y-6 w-full transition-all duration-300 ease-in-out",
