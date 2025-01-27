@@ -6,7 +6,6 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { userContext } from "@/context/user.context";
 import { userService } from "@/services/user";
 import { LoadingComponent } from "@/components/common/Loading";
-import Link from "next/link";
 
 
 export default function Patient() {
@@ -43,7 +42,7 @@ export default function Patient() {
         <div>
             {isLoading ? (
                 <LoadingComponent />
-            ) : user ? (
+            ) : (
                 <div className="pt-20">
                     <div className="space-y-4">
                         <div className="flex items-end justify-between">
@@ -57,13 +56,6 @@ export default function Patient() {
                         </div>
                         <TablePatient isLoading={isDataLoading} patients={filteredPatient} />
                     </div>
-                </div>
-            ) : (
-                <div className="flex flex-col justify-center items-center min-h-screen">
-                    <h1 className="font-bold text-2xl">La sesión ha expirado, por favor inicie sesión nuevamente.</h1>
-                    <Link href={'/'} className="bg-blue-500 text-white px-6 p-2 rounded-lg">
-                        Salir
-                    </Link>
                 </div>
             )}
         </div>

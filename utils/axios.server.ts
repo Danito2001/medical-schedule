@@ -26,7 +26,6 @@ axiosServer.interceptors.request.use(
 
 			if (!token) {
                 cookieStore.delete('user')
-                cookieStore.delete('authToken')
 				throw new Error("Unauthorized");
 			}
 			config.headers.Authorization = `Bearer ${token}`;
@@ -46,8 +45,8 @@ axiosServer.interceptors.response.use(
         
         if (error.response?.status === 403) {
             cookieStore.delete('user');
-            cookieStore.delete('authToken');
-          }
+		}
+
 		if (error.response?.status === 401) {
 			throw new Error("Unauthorized");
 		}

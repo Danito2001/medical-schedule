@@ -4,7 +4,7 @@ export interface UserT {
   lastName: string;
   email: string;
   appointment: Appointment[];
-  DoctorAvailability: DoctorAvailability;
+  doctorAvailability: DoctorAvailability;
 }
 
 interface DoctorAvailability {

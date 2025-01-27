@@ -6,7 +6,6 @@ import { useAppointment } from "@/hooks/useAppointment";
 import { useMedicalData } from "@/services/medicalService";
 import { validateData } from "@/store/actions/medicalActions";
 import { formattedArrayCenter, formattedArraySpecialty } from "@/helpers/formattedItems";
-import { useRouter } from "next/navigation";
 
 export default function MedicalReserve() {
 
@@ -24,11 +23,8 @@ export default function MedicalReserve() {
         centerItems: center
     })
 
-    const router = useRouter()
     const { validateUserData } = validateData()
     validateUserData()
-    
-    
 
     const specialtysEs = formattedArraySpecialty(specialty)
     const centerEs = formattedArrayCenter(center)

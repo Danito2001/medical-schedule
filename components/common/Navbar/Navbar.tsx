@@ -32,28 +32,28 @@ export default function Navbar() {
                             className="block min-[790px]:hidden cursor-pointer"
                         />
                         <div className='space-x-2 hidden min-[790px]:flex'>
-                            <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
+                            <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2 items-center'>
                                 <HomeIcon width={24}/>
                                 <Link 
                                     className={`hover:underline ${currentPath === '/' ? 'underline' : ''}`}
                                     href="/">Inicio
                                 </Link>
                             </div>
-                            <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
+                            <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2 items-center'>
                                 <ClockIcon width={24}/>
                                 <Link
                                     className={`hover:underline ${currentPath === '/reservation' ? 'underline' : ''}`} 
                                     href="/reservation">Mis reservas
                                 </Link>
                             </div>
-                            <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2'>
+                            <div className='flex space-x-2 bg-white text-blue-500 rounded-lg p-2 items-center'>
                                 <CalendarIcon width={24}/>
                                 <Link 
                                     className={`hover:underline ${currentPath === '/medical_appointment' ? 'underline' : ''}`} 
                                     href="/medical_consultation/patient_information">Reserva de hora
                                 </Link>
                             </div>
-                            <div className='flex space-x-2 bg-blue-700 text-white rounded-lg p-2'>
+                            <div className='flex space-x-2 bg-blue-700 text-white rounded-lg p-2 items-center'>
                                 <UserIcon width={24} />
                                 <Link
                                     onClick={closeSidebar}

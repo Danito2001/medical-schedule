@@ -35,7 +35,7 @@ export default function Reservation() {
                     <h4 className="text-2xl mb-2">¿No tienes cita médica? Agenda aquí</h4> 
                     <span>Agende una cita con nuestros profesionales</span>
                 </div>
-                <Link href='/medical_appointment'>
+                <Link href='/medical_consultation/patient_information'>
                     <Button className="bg-blue-500 rounded-lg mt-2 text-white">Agendar cita</Button> 
                 </Link>
             </div>

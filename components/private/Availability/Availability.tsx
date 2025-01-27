@@ -9,6 +9,7 @@ import { useAvailability } from "@/hooks/useAvailability";
 import { CheckboxComponent } from "@/components/common/Checkbox";
 import { userContext } from "@/context/user.context";
 import { days } from "@/helpers/calculateDays";
+import { formattedDays } from "@/helpers/formattedItems";
 import { userService } from "@/services/user";
 
 
@@ -37,6 +38,7 @@ export default function Availability() {
     
     useEffect(() => {
         if (user && user.appointment && Array.isArray(user.appointment)) {
+            console.log({user})
             const dataPatient = user.appointment.map(({ status, patient, numberAppointment, dateAndTime }) => {
                 return { status, patient, numberAppointment, dateAndTime }
             })
@@ -55,22 +57,11 @@ export default function Availability() {
         }
     }, [isPatient])
     
-    const formattedDays = (daysEn: string[] = []) => {
-        const orderedDays = [
-            'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
-        ];
     
-        return orderedDays
-            .filter(day => daysEn.includes(day))
-            .map(day => {
-                const matchedDay = days.find(d => d.value === day);
-                return matchedDay ? matchedDay.day : day;
-            });
-    };
 
     if (!user) return null;
 
-    const availability = [user.DoctorAvailability]
+    const availability = [ user.doctorAvailability ]
     
     return (
         <div className="relative flex overflow-x-hidden lg:overflow-hidden min-h-screen">
@@ -184,19 +175,26 @@ export default function Availability() {
                     </div>
                     <div className="border border-gray-400 rounded-lg p-6">
                         {   
-                            availability.map(({ days, startDateTime, endDateTime }, index) => {
-                                const daysInSpanish = formattedDays(days)
+                            availability.map((a, index) => {
+
+                                console.log({a})
+
+                                const validDays = Array.isArray(a?.days) ? a.days : [];
+                                const daysInSpanish = formattedDays(validDays);
+
                                 const availabilityInfo = daysInSpanish.map((day:string, index:number) => (
                                     <div key={index} className="flex justify-between">
-                                        <span>{day}{index < days.length - 1 ? <br /> : ''}</span>
-                                        <span>{startDateTime + ' - ' + endDateTime}</span>
+                                        <span>{day}{index < a.days.length - 1 ? <br /> : ''}</span>
+                                        <span>{a.startDateTime + ' - ' + a.endDateTime}</span>
                                     </div>
                                 ))
+
+                                console.log({daysInSpanish})
 
                                 return (
                                     <div key={index}
                                         >
-                                        {availabilityInfo}
+                                        { availabilityInfo }
                                     </div>
                                 )
                             })

@@ -19,11 +19,10 @@ export default function Detail({ params }: { params: { numberAppointment: number
 
     const [ appointment, setAppointment ] = useState<AppointmentType | null>(null);
 
+    const router = useRouter()
     const appointmentParams = Number(params.numberAppointment);
     
     const { rut, modalKey } = userContext()
-
-    const router = useRouter()
 
     const { status, cancelAppointment, confirmAppointment } = useAppointment()
 

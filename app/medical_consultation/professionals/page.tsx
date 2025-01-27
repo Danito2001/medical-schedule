@@ -36,13 +36,6 @@ export default function Professionals() {
 
     const pathname = usePathname()
 
-    
-    useEffect(() => {
-        if (pathname !== '/medical_consultation/professionals') {
-            console.log('cerrado')
-        }
-    }, [])
-
     useEffect(() => {
         const fetch = async () => {
 

@@ -1,4 +1,5 @@
 import { Key } from "react";
+import { days } from "./calculateDays";
 
 interface Specialty {
     id: number;
@@ -35,12 +36,12 @@ export const formattedTime = (time: Date) => {
 }
 
 export const specialtys = [
-    { key: 'Cardiology', value: 'Cardiología' },
-    { key: 'Neurology', value: 'Neurología' },
-    { key: 'Dermatology', value: 'Dermatología' },
-    { key: 'Pediatrics', value: 'Pediatría' },
-    { key: 'Orthopedics', value: 'Ortopedia' },
-    { key: 'Gynecology', value: 'Ginecología' }
+    { key: 'cardiology', value: 'Cardiología' },
+    { key: 'neurology', value: 'Neurología' },
+    { key: 'dermatology', value: 'Dermatología' },
+    { key: 'pediatrics', value: 'Pediatría' },
+    { key: 'orthopedics', value: 'Ortopedia' },
+    { key: 'gynecology', value: 'Ginecología' }
 ];
 
 
@@ -90,3 +91,16 @@ export const formattedArrayCenter = (center: Center[]) => {
 
     return newArray;
 }
+
+export const formattedDays = (daysEn: string[] = []) => {
+    const orderedDays = [
+        'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
+    ];
+
+    return orderedDays
+        .filter(day => daysEn.includes(day))
+        .map(day => {
+            const matchedDay = days.find(d => d.value === day);
+            return matchedDay ? matchedDay.day : day;
+        });
+};
