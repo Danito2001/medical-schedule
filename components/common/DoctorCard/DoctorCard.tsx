@@ -107,10 +107,10 @@ export default function DoctorCard({
                     <div className="flex flex-col">
                         <span>Seleccione una hora:</span>
                         <div className="flex overflow-x-auto space-x-2">
-                            {doc.DoctorAvailability ? (
+                            {doc.doctorAvailability ? (
                                 <TimeSlots
-                                    startDateTime={doc.DoctorAvailability.startDateTime}
-                                    endDateTime={doc.DoctorAvailability.endDateTime}
+                                    startDateTime={doc.doctorAvailability.startDateTime}
+                                    endDateTime={doc.doctorAvailability.endDateTime}
                                     dateObject={dateObject}
                                     name={doc.name}
                                     lastName={doc.lastName}

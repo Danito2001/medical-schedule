@@ -27,7 +27,7 @@ export async function GET(req: Request) {
 
         if (newAvailability.length > 0) {
             newAvailability.forEach((availability: any) => {
-                user.DoctorAvailability = {
+                user.doctorAvailability = {
                     startDateTime: availability.startDateTime,
                     endDateTime: availability.endDateTime,
                     days: availability.days || [],

@@ -4,7 +4,7 @@ export interface Doctor {
     lastName: string;
     specialty: Specialty;
     center: Center;
-    DoctorAvailability: DoctorAvailability;
+    doctorAvailability: DoctorAvailability;
 }
 
 interface Specialty {

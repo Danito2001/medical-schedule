@@ -77,8 +77,8 @@ export const userService = () => {
 			
 			setUser({
 				...user,
-				DoctorAvailability: {
-					...user.DoctorAvailability,
+				doctorAvailability: {
+					...user.doctorAvailability,
 					startDateTime: startDateTime,
 					endDateTime: endDateTime,
 					days: days

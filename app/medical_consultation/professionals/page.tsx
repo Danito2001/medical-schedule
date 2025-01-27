@@ -71,7 +71,7 @@ export default function Professionals() {
     const availableProfessionals = timeLoading
         ? professionals
         : professionals.filter((doc) => {
-            const timeForDoctor = timeLength.find((time) => time.nameId === doc.DoctorAvailability?.doctorId);
+            const timeForDoctor = timeLength.find((time) => time.nameId === doc.doctorAvailability?.doctorId);
             return timeForDoctor && timeForDoctor.length > 0;
     });
 
