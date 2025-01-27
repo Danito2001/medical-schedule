@@ -51,7 +51,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     const [ user, setUser ] = useState<UserT | null>(null);
     const [ rut, setRut ] = useState<string | null>(null);
-    const [ isLoading, setIsLoading ] = useState(true);
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ isDataLoading, setIsDataLoading ] = useState(false);
     const [ numberApoinment, setNumberAppointmnent ] = useState<number | null>(null);
     const [ modalKey, setModalKey ] = useState<ModalTypes | null>(null)
@@ -68,6 +68,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const fetchUser = async () => {
             
             if  (pathname === '/dashboard') {
+
+                setIsLoading(true)
+
                 try {
                     const response = await axiosClient.get('/session')
 
@@ -78,6 +81,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
                     setUser(response.data)
                     setIsLoading(false)
+
+                    console.log('daj')
                 } catch (error) {
                     console.error("Error fetching user data", error);
                     setUser(null);
@@ -87,7 +92,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
         fetchUser()
 
-    }, [])
+    }, [pathname])
 
     return (
         <UserContext.Provider value={{

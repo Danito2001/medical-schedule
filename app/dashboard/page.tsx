@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Sidebar from "@/components/private/Sidebar/Sidebar";
 import Patient from '@/components/private/Patient/Patient';
@@ -18,8 +18,7 @@ export default function Dashboard() {
 
     const handlePatient = useCallback(() => { setCurrentSection("patient") }, [])
     const handleAvailability = useCallback(() => { setCurrentSection("availability") }, [])
-
-
+    
     const renderedSections = () => {
         switch (currentSection) {
             case "patient":
@@ -39,7 +38,7 @@ export default function Dashboard() {
                 onPatient={handlePatient}
                 onAvailability={handleAvailability}
             />
-            <div className={`${isLoading ? '' : "px-4 lg:pl-[200px] lg:px-20"}`}>
+            <div className={`${ "px-4 lg:pl-[200px] lg:px-20"}`}>
                 {renderedSections()}    
             </div>
         </>

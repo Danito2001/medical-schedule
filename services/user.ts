@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { userContext } from "@/context/user.context";
 import axiosClient from "@/utils/axios.client"
 
@@ -16,6 +16,7 @@ export const userService = () => {
 	const { user, setUser, setIsLoading, setIsDataLoading } = userContext()
 
     const login = async ({ email, password }: { email: string, password: string }) => {
+
 		return await axiosClient.post('/login', { email, password })
 			.then((response) => {
 				const { user } = response.data

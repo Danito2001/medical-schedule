@@ -2,7 +2,7 @@ import axiosServer from "@/utils/axios.server";
 import { cookies } from "next/headers";
 
 
-export async function GET(req:Request) {
+export async function GET(_:Request) {
 
     const cookieStore = cookies()
 
