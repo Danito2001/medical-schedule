@@ -1,8 +1,17 @@
 import { LoginForm } from "@/components/common/LoginForm";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import React from "react";
 
 
-export default function Login() {
+export default async function Login() {
+
+    const token = await cookies().get('authToken');
+
+    console.log(cookies().getAll());
+    if (token) {
+        redirect("/dashboard")
+    }
 
     const Info: React.FC = () => (
         <div className="text-start text-sm space-y-2">
@@ -11,7 +20,6 @@ export default function Login() {
             <li>Las contraseñas son iguales para todos: <b>password123</b>.</li>
         </div>
     );
-      
     
     return (
         <div className="bg-blue-500">

@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { userContext } from "@/context/user.context";
 import axiosClient from "@/utils/axios.client"
 
@@ -22,7 +22,8 @@ export const userService = () => {
 				const { user } = response.data
 				setUser(user)
 				setIsLoading(false)
-				router.push('/dashboard');
+				router.replace('/dashboard');
+				router.refresh();
 			})
 			.catch((error:any) => {
                 console.log(error?.response?.data?.message || error.message)

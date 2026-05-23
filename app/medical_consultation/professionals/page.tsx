@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
 import axiosClient from "@/utils/axios.client";
 import { BottomSheet } from "@/components/common/BottomSheet";
 import { NotFoundComponent } from "@/components/common/NotFound";
@@ -12,7 +11,6 @@ import { RootState } from "@/store/store";
 import { Doctor } from "@/types/profesional";
 import { formattedDate } from "@/helpers/formattedItems";
 import DoctorCard from "@/components/common/DoctorCard/DoctorCard";
-import { usePathname } from "next/navigation";
 
 interface TimeLengthData {
     length: number;
@@ -33,8 +31,6 @@ export default function Professionals() {
 
     const dateObject = new Date(date!);
     validateUserData()
-
-    const pathname = usePathname()
 
     useEffect(() => {
         const fetch = async () => {

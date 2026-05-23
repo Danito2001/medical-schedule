@@ -5,7 +5,7 @@ import { BeakerIcon, BuildingOfficeIcon, CalendarIcon, UserIcon } from "@heroico
 
 import { userContext } from "@/context/user.context";
 import { RootState } from "@/store/store";
-import { formattedCenter, formattedDate, formattedSpecialty } from "@/helpers/formattedItems";
+import { formattedDate } from "@/helpers/formattedItems";
 import { handleCreateAppointment } from "@/services/appointment.services";
 import { useAppointment } from "@/hooks/useAppointment";
 import { useEffect } from "react";
@@ -20,7 +20,6 @@ export default function BottomSheet({ isCreateAppointment, setIsCreateAppointmen
     const { isBottomOpen, setIsBottomOpen } = useAppointment();
 
     const dispatch = useDispatch()
-    const pathname = usePathname()
     const router = useRouter()
 
     const { rut, setNumberAppointmnent } = userContext()
@@ -29,8 +28,6 @@ export default function BottomSheet({ isCreateAppointment, setIsCreateAppointmen
 
     const newDate = formattedDate(date)
 
-    const centerEs = formattedCenter(center)
-    const specialtyEs = formattedSpecialty(specialty)
 
     useEffect(() => {
         setIsBottomOpen(false)
@@ -57,7 +54,7 @@ export default function BottomSheet({ isCreateAppointment, setIsCreateAppointmen
 
                     <div className="flex text-white pb-1">
                         <BeakerIcon width={30} />
-                        <span className="text-lg pl-2">{specialtyEs}</span>
+                        <span className="text-lg pl-2">{specialty}</span>
                     </div>
                     <div className="my-auto border-t border-white"></div>
 
@@ -69,7 +66,7 @@ export default function BottomSheet({ isCreateAppointment, setIsCreateAppointmen
 
                     <div className="flex text-white pb-4">
                         <BuildingOfficeIcon width={30} />
-                        <span className="text-lg bg-pink-500 pl-1 rounded-lg">AgendaMed - {centerEs}</span>
+                        <span className="text-lg bg-pink-500 pl-1 rounded-lg">AgendaMed - {center}</span>
                     </div>
                 </div>
 

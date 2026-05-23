@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import { customSwal } from "@/helpers/custom_swal";
 import axiosClient from "@/utils/axios.client"
 
-
 const cache: { [key:string]: any } = {}
 
 const fetchFromCacheOrApi = async(url:string) => {
     if (cache[url]) {
         return cache[url];
     }
+
     const response = await axiosClient.get(url);
     cache[url] = response.data;
     return response.data;
@@ -58,7 +58,6 @@ export const useMedicalData = () => {
         specialty,
         center,
         prevision,
-        // profesionals,
         isLoading
     }
 }

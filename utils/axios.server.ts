@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { cookies } from "next/headers";
 
-const baseURL = process.env.REACT_APP_BACKEND_URL || "https://medical-schedule-backend.onrender.com/api";
+const baseURL = process.env.REACT_APP_BACKEND_URL || "https://medical-api-kz7o.onrender.com/api";
 
 const axiosServer = axios.create({
     baseURL
 })
 
 const routesConfig = {
-    auth: ["/users/login/"],
+    auth: ["/users/login"],
     appointments: ["/appointment/update-appointment", "/appointment/get-appointment", "/appointment", "/appointment/appointment-by-user"],
     specialties: ["/specialty", "/previsions", "/medical-center"],
 	validationRut: ["/rut"],

@@ -1,4 +1,3 @@
-import { formattedSpecialty } from "@/helpers/formattedItems";
 import { generateTimeSlots } from "@/helpers/timeSlots";
 import { useAppointment } from "@/hooks/useAppointment";
 import { Doctor } from "@/types/profesional";
@@ -101,7 +100,7 @@ export default function DoctorCard({
                         <UserIcon width={24} />
                         <div className="flex flex-col">
                             <h3 className="text-xl font-semibold text-blue-500">{doc.name} {doc.lastName}</h3>
-                            <span className="font-semibold">{formattedSpecialty(doc.specialty?.name)}</span>
+                            <span className="font-semibold">{doc.specialty.name}</span>
                         </div>
                     </div>
                     <div className="flex flex-col">

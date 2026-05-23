@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 		const cookieStore = cookies();
 		const { email, password } = await request.json();
 
-		const response = await axiosServer.post("/users/login/", {
+		const response = await axiosServer.post("/users/login", {
 			email,
 			password,
 		});

@@ -5,7 +5,6 @@ import { AutocompleteSpecialty } from "@/components/common/Autocomplete";
 import { useAppointment } from "@/hooks/useAppointment";
 import { useMedicalData } from "@/services/medicalService";
 import { validateData } from "@/store/actions/medicalActions";
-import { formattedArrayCenter, formattedArraySpecialty } from "@/helpers/formattedItems";
 
 export default function MedicalReserve() {
 
@@ -26,9 +25,6 @@ export default function MedicalReserve() {
     const { validateUserData } = validateData()
     validateUserData()
 
-    const specialtysEs = formattedArraySpecialty(specialty)
-    const centerEs = formattedArrayCenter(center)
-
     return (
         <div className="pt-4 bg-blue-500 min-h-screen">
             <div className="flex items-center justify-center py-20">
@@ -45,7 +41,7 @@ export default function MedicalReserve() {
                         <AutocompleteSpecialty
                             isLoading={isDataLoading}
                             handleSelectionChange={handleSpecialty}
-                            items={specialtysEs}
+                            items={specialty}
                         />
                     </div>
                     <div>
@@ -53,7 +49,7 @@ export default function MedicalReserve() {
                         <AutocompleteSpecialty
                             isLoading={isDataLoading}
                             handleSelectionChange={handleLocation}
-                            items={centerEs}
+                            items={center}
                         />
                     </div>
                     <div className="flex justify-center">
