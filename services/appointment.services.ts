@@ -2,6 +2,7 @@ import axiosClient from "@/utils/axios.client"
 import { Dispatch } from "@reduxjs/toolkit";
 import { startCreateAppointment } from "@/store/thunks/appointmentThunk";
 import { customSwal } from "@/helpers/custom_swal";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface UpdateProps {
     rut: string | null;
@@ -16,6 +17,15 @@ interface CreateProps {
     email:string;
     setNumberAppointmnent: (numberApoinment: number | null) => void;
     setIsCreateAppointment: (isCreateAppointment: boolean) => void;
+}
+
+interface CancelAppointmentProps {
+    rut: string | null, 
+    numberAppointment: number, 
+    router: AppRouterInstance;
+    email: string | null;
+    date: string;
+    time: string;
 }
 
 export const updateAppointment = async({rut, numberAppointment, status}: UpdateProps ) => {
@@ -35,22 +45,28 @@ export const updateAppointment = async({rut, numberAppointment, status}: UpdateP
 
 }
 
-export const handleCancelAppointment = async (rut: string | null, numberAppointment: number, router: any) => {
+export const handleCancelAppointment = async ({ rut, numberAppointment, router, email, date, time }: CancelAppointmentProps) => {
 
     const updatedStatus = "disabled";
 
     try {
         
-        customSwal({
-            title: "Cita cancelada con éxito",
-            error: "success"
-        })
-
         await updateAppointment({
             rut,
             numberAppointment,
             status: updatedStatus
         })
+
+        customSwal({
+            title: "Cita cancelada con éxito",
+            error: "success"
+        })
+
+        await axiosClient.post('https://medical-api-kz7o.onrender.com/api/send-email', {
+            to: email,
+            subject: 'Cita cancelada',
+            text: `Su cita para el día ${date} - ${time} horas ha sido cancelada.`,
+        });
 
         router.push('/');
     } catch (error:any) {

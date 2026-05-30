@@ -12,18 +12,29 @@ import { SkeletonComponent } from "@/components/common/Skeleton";
 import { formattedDate, formattedTime } from "@/helpers/formattedItems";
 import { useDispatch } from "react-redux";
 import { setCleanData } from "@/store/slices/appointmentSlice";
+import { AppointmentType } from "@/types/appointment";
 
 export default function SuccessfulReservation({ params }: { params: { numberAppointment: number } }) {
 
     const router = useRouter()
     const appointmentNumber = Number(params.numberAppointment);
     
-    const [ appointment, setAppointment ] = useState<any | null>(null)
+    const [ appointment, setAppointment ] = useState<AppointmentType | null>(null)
     
-    const { rut } = userContext()
+    const rut = userContext().rut;
     const dispatch = useDispatch()
 
     const email = sessionStorage.getItem('email');
+
+
+    const dateAndTime = appointment?.dateAndTime
+    const stringDate = dateAndTime
+        ? formattedDate(dateAndTime)
+        : '';
+        
+    const time = dateAndTime
+        ? formattedTime(new Date(dateAndTime))
+        : '';
 
     useEffect(() => {
 
@@ -68,17 +79,13 @@ export default function SuccessfulReservation({ params }: { params: { numberAppo
                 if (!appointment) {
                     return null;
                 }
-                const dateAndTime = appointment.dateAndTime
-                const stringDate = formattedDate(dateAndTime);
 
-                const objectDate = new Date(dateAndTime)
-                const time = formattedTime(objectDate)
-
-                await axiosClient.post('https://medical-schedule-backend.onrender.com/api/send-email', {
+                await axiosClient.post('https://medical-api-kz7o.onrender.com/api/send-email', {
                     to: email,
                     subject: 'Cita agendada',
                     text: `Su cita ha sido agendada exitosamente para el día ${stringDate} - ${time} horas.`,
                 });
+
                 dispatch(setCleanData())
                 sessionStorage.removeItem('email')
             } catch (error) {
@@ -88,7 +95,6 @@ export default function SuccessfulReservation({ params }: { params: { numberAppo
 
         sendEmail();
     }, [appointment]);
-
 
     if (!appointment) {
         return <SkeletonComponent height="h-[400px]" width="w-[500px]"/>
@@ -126,7 +132,14 @@ export default function SuccessfulReservation({ params }: { params: { numberAppo
                                     Volver a inicio
                                 </button>
                                 <button
-                                    onClick={() => handleCancelAppointment(rut, numberAppointment, router)}
+                                    onClick={() => handleCancelAppointment({
+                                        rut,
+                                        numberAppointment,
+                                        router,
+                                        email,
+                                        date: stringDate,
+                                        time
+                                    })}
                                     className="flex flex-col items-center border border-gray-500 rounded-lg p-2"
                                 >
                                     <XMarkIcon width={30} />
