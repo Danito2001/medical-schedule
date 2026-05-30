@@ -10,7 +10,7 @@ import { useCalculateDaysUntilAppointment } from "@/helpers/calculateDays";
 import { useAppointment } from "@/hooks/useAppointment";
 import { updateAppointment } from "@/services/appointment.services";
 import { customSwal } from "@/helpers/custom_swal";
-import { formattedCenter, formattedDate, formattedSpecialty, formattedTime } from "@/helpers/formattedItems";
+import { formattedDate, formattedTime } from "@/helpers/formattedItems";
 import { SkeletonComponent } from "@/components/common/Skeleton";
 import { AppointmentType } from "@/types/appointment";
 
@@ -129,9 +129,6 @@ export default function Detail({ params }: { params: { numberAppointment: number
     const dateObject = new Date(dateAndTime);
     const date = formattedDate(dateObject)
 
-    const centerEs = formattedCenter(commune)
-    const specialtyEs = formattedSpecialty(specialtyName)
-
     const newDate = new Date(dateAndTime);
     const time = formattedTime(newDate);
 
@@ -141,8 +138,8 @@ export default function Detail({ params }: { params: { numberAppointment: number
             date={date}
             time={time}
             doctor={doctorName + ' ' + lastName}  
-            specialty={specialtyEs!}
-            center_of_preference={centerEs!}  
+            specialty={specialtyName}
+            center_of_preference={commune}  
             daysRemaining={calculateDaysUntilAppointment(new Date(dateAndTime))}
             confirmAppointment={confirmAppointment}
             cancelAppointment={cancelAppointment}
